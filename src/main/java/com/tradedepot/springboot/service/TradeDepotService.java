@@ -10,14 +10,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@CacheConfig(cacheNames = {"deliveries"})
 public class TradeDepotService {
 
     @Autowired
     TradeDepotRepository tradeDepotRepository;
 
-    @Cacheable
-    public List<Delivery> getDeliveries() {
+    public List<Delivery> getDeliveries() throws Exception {
         return tradeDepotRepository.fetchDeliveries();
     }
 

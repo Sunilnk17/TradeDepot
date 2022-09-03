@@ -26,14 +26,18 @@ public class TradeDepotRepository {
     @Value("${tdUrl}")
     private String tdUrl;
 
-    public List<Delivery> fetchDeliveries() {
+    public List<Delivery> fetchDeliveries() throws Exception {
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", tokenHolder.getToken());
 
         HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
-        ResponseEntity<TDClientResponse> exchange = restTemplate.exchange(tdUrl, HttpMethod.POST, entity, TDClientResponse.class);
+        try {
+            ResponseEntity<TDClientResponse> exchange = restTemplate.exchange(tdUrl, HttpMethod.POST, entity, TDClientResponse.class);
 
-        return Objects.requireNonNull(exchange.getBody()).getData();
+            return Objects.requireNonNull(exchange.getBody()).getData();
+        } catch (Exception e) {
+            throw new Exception("Something went wrong from Client side call!");
+        }
     }
 }
