@@ -1,8 +1,11 @@
 package com.tradedepot.springboot.Filters;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tradedepot.springboot.models.Response.ErrorResponse;
 import com.tradedepot.springboot.models.TokenHolder;
 import io.netty.util.internal.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
 import javax.servlet.Filter;
@@ -32,7 +35,15 @@ public class TokenFilter implements Filter {
                 HttpServletResponse response = (HttpServletResponse) servletResponse;
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-                response.getWriter().write("{\"message\": \"Token is mandatory. Please send the valid token to proceed.\"}");
+
+                ErrorResponse errorResponse = ErrorResponse
+                        .builder()
+                        .type("https://trade-depot.com/#invalid-token-error")
+                        .title("Invalid Token")
+                        .statusCode(HttpStatus.BAD_REQUEST.value())
+                        .detail("Token is mandatory. Please send the valid token to proceed").build();
+
+                response.getWriter().write(new ObjectMapper().writeValueAsString(errorResponse));
             }
 
 
