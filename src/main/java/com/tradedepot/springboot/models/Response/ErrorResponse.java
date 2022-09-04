@@ -9,9 +9,7 @@ import org.springframework.http.HttpStatus;
 @Getter
 @Setter
 public class ErrorResponse {
-
     //RFC Error format
-
     private final String type;
     private final String title;
     private final String detail;
