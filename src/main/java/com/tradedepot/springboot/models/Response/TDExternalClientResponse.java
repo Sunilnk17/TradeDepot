@@ -8,13 +8,13 @@ import java.util.List;
 
 @Getter
 @Setter
-public class TDClientResponse {
+public class TDExternalClientResponse {
 
     private Boolean success;
     private int code;
     private String message;
     private List<Delivery> data;
 
-    public TDClientResponse() {
+    public TDExternalClientResponse() {
     }
 }

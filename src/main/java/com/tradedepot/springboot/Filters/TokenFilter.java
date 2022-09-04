@@ -3,6 +3,7 @@ package com.tradedepot.springboot.Filters;
 import com.tradedepot.springboot.models.TokenHolder;
 import io.netty.util.internal.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -30,7 +31,7 @@ public class TokenFilter implements Filter {
             } else {
                 HttpServletResponse response = (HttpServletResponse) servletResponse;
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                response.setContentType("application/json");
+                response.setContentType(MediaType.APPLICATION_JSON_VALUE);
                 response.getWriter().write("{\"message\": \"Token is mandatory. Please send the valid token to proceed.\"}");
             }
 
