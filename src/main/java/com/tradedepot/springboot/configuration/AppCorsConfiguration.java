@@ -21,7 +21,6 @@ public class AppCorsConfiguration {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.setAllowedOriginPatterns(Collections.singletonList("https://trade-depot-frontend-app.azurewebsites.net"));
         config.setAllowedOriginPatterns(Collections.singletonList(tdFrontEndUrl));
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
